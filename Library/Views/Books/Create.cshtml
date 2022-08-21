@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models;
+@model Library.Models.Book;
+
+<h4>Add new book:</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Title)
+  @Html.TextBoxFor(model => model.Title, new { @class="form-control"})
+  @Html.LabelFor(model => model.DatePublished)
+  @Html.TextBoxFor(model => model.DatePublished, new { @type = "date", @class="form-control"})
+  @Html.LabelFor(model => model.Description)
+  @Html.TextBoxFor(model => model.Description, new { @class="form-control"})
+  @Html.LabelFor(model => model.Publisher)
+  @Html.TextBoxFor(model => model.Publisher, new { @class="form-control"})
+  
+  <input type="submit" value="Add Book" />
+
+}
