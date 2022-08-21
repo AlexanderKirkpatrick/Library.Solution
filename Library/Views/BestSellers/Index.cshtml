@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Library.Models
+
+<ol>
+  @foreach(BestSeller bestSeller in Model)
+  {
+    <ul>
+      <li>Title: @bestSeller.Title</li>
+      <li>Author: @bestSeller.Author</li>>
+      <li>Description: @bestSeller.Description</li>
+    </ul>
+  }
+</ol>

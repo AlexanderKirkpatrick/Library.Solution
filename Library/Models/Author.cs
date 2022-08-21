@@ -14,6 +14,6 @@ namespace Library.Models
     public string Name { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string Bio { get; set; }
-    public ICollection<AuthorBook> Books { get; set; }
+    public virtual ICollection<AuthorBook> Books { get; set; }
   }
 }

@@ -8,9 +8,9 @@ namespace Library.Models
   {
     public int CopyApplicationUserId { get; set; }
     public int CopyId { get; set; }
-    public Copy Copy { get; set; }
+    public virtual Copy Copy { get; set; }
     public string ApplicationUserId { get; set; }
-    public ApplicationUser ApplicationUser { get; set; }
+    public virtual ApplicationUser ApplicationUser { get; set; }
     public DateTime CheckoutDate { get; set; }
     public DateTime DueDate { get; set; }
     public Boolean Returned { get; set; } = false;

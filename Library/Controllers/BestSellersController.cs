@@ -7,9 +7,9 @@ namespace Library.Controllers
 {
   public class BestSellersController : Controller
   {
-    public ActionResult Index()
+    public IActionResult Index()
     {
-      List<BestSeller> allBestSellers = BestSeller.GetBestSellers(EnvironmentalVariables.ApiKey);
+      var allBestSellers = BestSeller.GetBestSellers(EnvironmentVariables.ApiKey);
       return View(allBestSellers);
     }
   }

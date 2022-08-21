@@ -6,21 +6,19 @@ namespace Library.Models
 {
   public class BestSeller
   {
-    public string Book_Title { get; set; }
-    public string Book_Author { get; set; }
-    public string Publication_Dt { get; set; }
-    public string Summary { get; set; }
-    public string Url { get; set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public string Description { get; set; }
 
-    public static List<BestSeller> GetBestSellers(string query, string type)
+    public static List<BestSeller> GetBestSellers(string apiKey)
     {
-      var apiCallTask = ApiHelper.ApiCall(query, type);
+      var apiCallTask = ApiHelper.ApiCall(apiKey);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-      List<BestSeller> BestSellerList = JsonConvert.DeserializeObject<List<BestSeller>>(jsonResponse["results"].ToString());
+      List<BestSeller> bestSellerList = JsonConvert.DeserializeObject<List<BestSeller>>(jsonResponse["results"].ToString());
 
-      return BestSellerList;
+      return bestSellerList;
 
     }
   }
