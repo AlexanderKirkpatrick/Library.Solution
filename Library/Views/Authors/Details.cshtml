@@ -29,10 +29,17 @@ else
     <li>@Html.ActionLink($"{join.Book.Title}", "Details", "Books", new { id = join.Book.BookId })</li>
   }
   </ul>
+  @foreach(var join in Model.Books)
+  {
+  @if (User.Identity.IsAuthenticated)
+      {   
+        @using (Html.BeginForm("DeleteBook", "Authors"))
+        {
+          @Html.Hidden("joinId", @join.AuthorBookId)
+          <input type="submit" value="Delete"/>
+        }
+      }
+  }
 }
 <br>
 @Html.ActionLink("Add a Book To this Author", "AddBook", new {id = @Model.AuthorId })
-<br>
-<br>
-<br>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>

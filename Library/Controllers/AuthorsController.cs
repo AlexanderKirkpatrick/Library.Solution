@@ -11,7 +11,6 @@ using System.Security.Claims;
 
 namespace Library.Controllers
 {
-  [Authorize]
   public class AuthorsController : Controller
   {
     private readonly LibraryContext _db;
@@ -28,7 +27,7 @@ namespace Library.Controllers
       List<Author> authorList = _db.Authors.ToList();
       return View(authorList);
     }
-
+    [Authorize]
     public ActionResult Create()
     {
       return View();
@@ -50,7 +49,7 @@ namespace Library.Controllers
         .FirstOrDefault(author => author.AuthorId == id);
       return View(thisAuthor);
     }
-
+    [Authorize]
     public ActionResult Edit(int id)
     {
       var thisAuthor = _db.Authors.FirstOrDefault(authors => authors.AuthorId == id);
@@ -64,7 +63,7 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     public ActionResult AddBook(int id)
     {
       var thisAuthor = _db.Authors.FirstOrDefault(authors => authors.AuthorId == id);
@@ -82,7 +81,7 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisAuthor = _db.Authors.FirstOrDefault(authors => authors.AuthorId == id);

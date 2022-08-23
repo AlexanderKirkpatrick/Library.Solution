@@ -29,10 +29,20 @@ else
     <li>@Html.ActionLink($"{join.Author.Name}", "Details", "Authors", new { id = join.Author.AuthorId })</li>
   }
   </ul>
-
+  @foreach(var join in Model.Authors)
+  {
+  @if (User.Identity.IsAuthenticated)
+      {   
+        @using (Html.BeginForm("DeleteAuthor", "Books"))
+        {
+          @Html.Hidden("joinId", @join.AuthorBookId)
+          <input type="submit" value="Delete"/>
+        }
+      }
+  }
   @Html.ActionLink("Add another Author for this book", "AddAuthor", new {id = @Model.BookId })
-
-
+<br>
+<br>
 }
 @if((@ViewBag.CheckoutCount + @ViewBag.AvailableCount) == 0)
 {
@@ -44,7 +54,9 @@ else
 
 <p>Copies available: @ViewBag.AvailableCount</p>
 }
-<h3>Add Additional Copies?</h3>
+<br>
+<h4>Add Additional Copies?</h4>
+<br>
 @using (Html.BeginForm("Create", "Copies", FormMethod.Post))
 {
   @Html.HiddenFor(model => model.BookId)
@@ -52,12 +64,8 @@ else
   @Html.TextBox("Copies", "Enter number to add", new { @type = "number" } )
   <button class="btn btn-info" type="submit">Add</button>
 }
-
+<br>
 @using (Html.BeginForm("CheckOut", "Copies", new {BookId = Model.BookId}))
 {
   <button class="btn btn-alert" type="submit">Check Out Book</button>
 }
-<br>
-<br>
-<br>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>

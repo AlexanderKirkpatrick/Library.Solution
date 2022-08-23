@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace Library.Controllers
 {
-  [Authorize]
+  
   public class BooksController: Controller
   {
     private readonly LibraryContext _db;
@@ -28,7 +28,7 @@ namespace Library.Controllers
       List<Book> bookList = _db.Books.Include(books => books.Authors).ThenInclude(join => join.Author).OrderBy(books => books.Title).ToList();
       return View(bookList);
     }
-
+    
     public ActionResult Details(int id)
     {
       var thisBook = _db.Books.Include(books => books.Authors)
@@ -39,7 +39,7 @@ namespace Library.Controllers
       ViewBag.AvailableCount = _db.Copies.Where(copy => copy.BookId == id).Where(copy => copy.IsCheckedOut == false).ToList().Count;
       return View(thisBook);
     }
-
+    [Authorize]
     public ActionResult Create()
     {
       return View();
@@ -52,7 +52,7 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     public ActionResult Edit(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
@@ -71,7 +71,7 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     public ActionResult Delete (int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId ==  id);
@@ -86,7 +86,7 @@ namespace Library.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
+    [Authorize]
     public ActionResult AddAuthor(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(books => books.BookId == id);
@@ -111,7 +111,7 @@ namespace Library.Controllers
       var authorBook = _db.AuthorBook.FirstOrDefault(join => join.AuthorBookId == joinId);
       _db.AuthorBook.Remove(authorBook);
       _db.SaveChanges();
-      return RedirectToAction("Details", authorBook.BookId);
+      return RedirectToAction("Index");
     }
   }
 }
