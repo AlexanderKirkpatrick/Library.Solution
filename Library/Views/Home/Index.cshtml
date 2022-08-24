@@ -3,6 +3,7 @@
 }
 
 <h1>Welcome to the Librarian's Paradise!</h1>
+
 <br>
 <br>
 <br>
@@ -11,5 +12,12 @@
 <p>@Html.ActionLink("Best Sellers Lists", "Index", "BestSellers")</p>
 <br>
 <br>
+<br>
 <p>@Html.ActionLink("Create an account", "Register", "Account")</p>
-<p>@Html.ActionLink("Login", "Login", "Account")</p>
+@if (!User.Identity.IsAuthenticated)
+      {
+        @using (Html.BeginForm("LogOff", "Account"))
+        {
+          <p>@Html.ActionLink("Login", "Login", "Account")</p>
+        }
+      }                              
